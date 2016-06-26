@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+{% extends 'SistemaHorario/Header.html' %}
+
+<html>
+
+	{% block content %}
+	
+  <head>
+	
+	<title>Departamentos</title>
+	
+  </head>
+    
+  <body>
+  
+	<div class="container">
+						
+			<ul class="collection with-header">
+			
+				<li class="collection-header"><h4>Departamentos</h4></li>
+			{% for departamento in departamentos %}
+			
+				<li class="collection-item dismissable" >{{departamento.nome}}
+				<a class="secondary-content tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar" 
+				href="{% url 'SistemaHorario.views.departamento_detail' pk=departamento.pk %}">
+				<i class="material-icons" >mode_edit</i></a>
+				<a class="secondary-content tooltipped" data-position="bottom" data-delay="50" data-tooltip="Excluir" 
+				href="{%url 'SistemaHorario.views.departamento_excluir' pk=departamento.pk %}">
+				<i class="material-icons" >delete</i></a>
+				</li>
+
+			{% endfor %}
+			
+			</ul>
+
+	</div>
+			 
+	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+		<a class="waves-effect btn-floating btn-large red modal-trigger" href="#modal1" >
+			<i class="large material-icons">add</i>
+		</a>
+	</div>
+	
+		<div id="modal1" class="modal">
+				<div class="modal-content">
+					 <form method="POST" class="col s12">{% csrf_token %}
+						<div class="row">
+							<div class="input-field col s10" type="text" >
+								{{form.nome}}
+								<label for="id_nome">Nome</label>
+							</div>
+							<div class="input-field col s2" type="text">
+								{{form.sigla}}
+								<label for="id_sigla">Sigla</label>
+							</div>
+						</div>
+						<div class="modal-footer" >
+						  <button type="submit" class="waves-effect save btn btn-default" >Salvar</button>
+						</div>
+					  </form>
+				</div>
+		</div>
+		
+	{% endblock content %}
+	
+  </body>
+
+</html>

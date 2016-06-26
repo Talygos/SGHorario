@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+{% extends 'SistemaHorario/Header.html' %}
+
+<html>
+
+{% block content %}
+  <head>
+  
+	<title>{{disciplina.nome}}</title>
+	
+	</head>
+	
+	<body>
+
+		<div class="container">
+			<br></br><br></br>
+			
+			<form method="POST" class="col s12">{% csrf_token %}
+				<div class="row">	
+					<div class="input-field col s10" type="text">
+						{{form.nome}}
+						<label for="name">Nome</label>
+					</div>
+					<div class="input-field col s2" type="text">
+						{{form.cargaHoraria}}
+						<label for="CH">Carga Horária</label>
+					</div>
+				 </div>
+					{{form.departamento}}
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col s10">
+							<a  href="{% url 'SistemaHorario.views.disciplinas' %}" class="waves-effect save btn btn-default">Cancelar</a>
+						</div>
+						<div class="col s2">
+							<button type="submit" class="waves-effect save btn btn-default" >Salvar</button>
+						</div>	
+					</div>
+				</div>
+			</form>	
+		</div>	
+	
+	
+	</body>
+	
+{% endblock content %}
+</html>

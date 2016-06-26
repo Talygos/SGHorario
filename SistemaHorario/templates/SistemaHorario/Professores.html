@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+{% extends 'SistemaHorario/Header.html' %}
+
+<html>
+
+	{% block content %}
+
+  <head>
+  	
+	<title>Professores</title>
+
+  </head>
+  
+  <body>
+  
+	<div class="container">
+	
+		<ul class="collection with-header">
+			
+			<li class="collection-header"><h4>Professores</h4></li>
+			{% for professor in professores %}
+		
+			<li class="collection-item dismissable" >{{professor.nome}}
+				<a class="secondary-content tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar" 
+				href="{% url 'SistemaHorario.views.professor_detail' pk=professor.pk %}">
+				<i class="material-icons" >mode_edit</i></a>
+				<a class="secondary-content tooltipped" data-position="bottom" data-delay="50" data-tooltip="Excluir" 
+				href="{%url 'SistemaHorario.views.professor_excluir' pk=professor.pk %}">
+				<i class="material-icons" >delete</i></a>
+			</li>
+
+			{% endfor %}
+			
+		</ul>
+		
+	</div>
+	 
+	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+		<a class="waves-effect btn-floating btn-large red modal-trigger" href="#modal1" >
+			<i class="large material-icons">add</i>
+		</a>
+	</div>
+
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+			<form method="POST" class="col s12">{% csrf_token %}
+			{{form.as_p}}<!--
+				<div class="row">	
+					<div class="input-field col s10">
+						<i class="material-icons prefix">perm_identity</i>
+						{{form.nome}}
+						<label for="name">Nome</label>
+					</div>
+					<div class="input-field col s2">
+						{{form.cargaHoraria}}
+						<label for="CH">Carga Horária</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<i class="material-icons prefix">phone</i>
+						{{form.telefone}}
+						<label for="Telefone">Telefone</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">email</i>
+						{{form.email}}
+						<label for="Email">Email</label>
+					</div>
+				</div>
+				<div class ="row">
+					<div class="input-field col s8">
+						{{form.departamento}}
+						<label for="Departamento">Departamento</label>
+					</div>
+					<div type="checkbox" class="input-field col s4" >
+						{{form.chefe}}
+						<label for="chefe">Chefe</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						{{form.disciplina}}
+						<label for="Disciplina">Disciplina</label>
+					</div>
+				</div>-->
+				<div class="modal-footer">
+					<button type="submit" class="waves-effect save btn btn-default" >Salvar</button>
+				</div>	
+			</form>
+		</div>
+
+	 </div>
+		
+	  {% endblock content %}
+	  	  
+  </body>
+</html>
